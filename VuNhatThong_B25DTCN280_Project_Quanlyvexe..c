@@ -153,7 +153,6 @@ int main() {
     return 0;
 }
 
-/* --- DINH NGHIA CAC HAM TIEN ICH (UTILITY FUNCTIONS) --- */
 
 /* Xoa ky tu xuong dong o cuoi chuoi do fgets tao ra */
 void removeNewline(char *str) {
@@ -231,15 +230,13 @@ int isValidDate(const char *date) {
     return 1;
 }
 
-/* --- DINH NGHIA CAC HAM CHUC NANG (FEATURE FUNCTIONS) --- */
 
 /* Them mot chuyen xe moi vao he thong */
 void addTrip(Trip trips[], int *tripCount) {
     Trip c1; /* Bien tam de luu thong tin chuyen xe dang nhap */
     int i, isDuplicate, hopLe;
     char buf[20]; /* Bo dem de xu ly nhap so an toan */
-   
-    /* --- KHOI 1: NHAP ID CHUYEN XE --- */
+
     /* Can kiem tra ky: khong de trong, khong co khoang trang, khong trung ID cu */
     while (1) {
         printf("Enter Trip ID: ");
@@ -270,8 +267,7 @@ void addTrip(Trip trips[], int *tripCount) {
         /* Neu khong trung lap thi thoat vong lap nhap ID */
         if (!isDuplicate) break;
     }
-   
-    /* --- KHOI 2: NHAP THONG TIN DIA DIEM --- */
+
     /* Su dung fgets de doc ca dong, bao gom khoang trang o ten dia diem */
     
     /* Nhap ten diem di */
@@ -310,8 +306,7 @@ void addTrip(Trip trips[], int *tripCount) {
         if (!isEmpty(c1.destination.address, 100)) break;
         else printf("Invalid destination address.\n");
     }
-   
-    /* --- KHOI 3: NHAP NGAY THANG --- */
+  
     /* Bat buoc phai dung dinh dang de thuan tien cho viec bao cao sau nay */
     while (1) {
 	    printf("Enter Date (dd/mm/yyyy): ");
@@ -322,7 +317,6 @@ void addTrip(Trip trips[], int *tripCount) {
 	    printf("Invalid date format. Please try again!\n");
 	}
 
-    /* --- KHOI 4: NHAP SO GHE (QUAN TRONG) --- */
     /* Khong dung scanf truc tiep de tranh bi troi lenh hoac loi khi nhap chu */
     while (1) {
         printf("Enter Total Seats: ");
@@ -350,11 +344,8 @@ void addTrip(Trip trips[], int *tripCount) {
         if (c1.totalSeats <= 0) {
             printf("Seats must be > 0!\n");
             continue;
-        }
-        break;
-    }
-   
-    /* --- KHOI 5: LUU DU LIEU --- */
+		}
+     
     c1.bookedSeats = 0; /* Khoi tao so ghe da dat la 0 */
     
     /* Luu vao mang tai vi tri hien tai (*tripCount) */
@@ -418,7 +409,6 @@ void updateTrip(Trip trips[], int nTrips) {
         if (choice == 0) break;
         
         switch (choice) {
-            /* --- CAP NHAT THONG TIN CO BAN (Case 1-4) --- */
             /* Chi cap nhat neu nguoi dung nhap noi dung moi. 
                Neu de trong (enter luon) thi giu nguyen thong tin cu. */
             case 1:
@@ -446,7 +436,6 @@ void updateTrip(Trip trips[], int nTrips) {
                 if (!isEmpty(s, 100)) strcpy(trips[index].destination.address, s);
                 break;
                 
-           /* --- CAP NHAT NGAY THANG (Case 5) --- */
            case 5: {
                 /* Can tao block {} vi khai bao bien tmpDate ben trong switch case */
 			    char tmpDate[20];
@@ -464,15 +453,13 @@ void updateTrip(Trip trips[], int nTrips) {
 			    break;
 			}
 
-            /* --- CAP NHAT SO GHE (Case 6) - QUAN TRONG --- */
             case 6:
                 printf("Enter new Total Seats: ");
                 fgets(s, sizeof(s), stdin);
                 removeNewline(s);
                 newSeats = atoi(s);
                 
-                /* LOGIC QUAN TRONG: So ghe tong moi phai lon hon hoac bang so ghe da co nguoi dat.
-                   Vi du: Xe 40 cho, da dat 20 cho. Khong the sua tong ghe xuong con 15 duoc. */
+               
                 if (newSeats >= trips[index].bookedSeats) {
                     trips[index].totalSeats = newSeats;
                 } else {
@@ -992,3 +979,4 @@ void reportMenu(Ticket tickets[], int nTickets, Trip trips[], int nTrips) {
             printf("Invalid choice!\n");
     }
 }
+
